@@ -19,8 +19,8 @@
 }
 .container_for_note{
     display:flex;
-    justify-content: center;
-    align-items:center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .text_area{
