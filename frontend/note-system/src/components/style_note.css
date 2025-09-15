@@ -1,3 +1,4 @@
+
  {
     background-color: #cccccc ; 
 }
@@ -13,14 +14,16 @@
     align-items: center; 
     text-align: center;
     padding: 10px;
+    box-sizing: border-box;
     border-radius: 10px;
     background-color: #b1b1b3;
     box-shadow: 5px 5px 10px rgba(0,0,0, 0.3)
 }
 .container_for_note{
     display:flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
     gap: 10px;
+    justify-content: center;
 }
 
 .text_area{
