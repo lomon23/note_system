@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import "./style_note.css";
 
+interface NoteType {
+  id: number;
+  text: string;
+}
+
 const Note: React.FC = () => {
-  const [notes, setNotes] = useState<number[]>([1]);
+  const [notes, setNotes] = useState<NoteType[]>([
+    { id: 1, text: "# Привіт 👋\nТут можна писати **Markdown**" },
+  ]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Enter" && event.altKey) {
-        setNotes((prev) => [...prev, prev.length + 1]);
+        setNotes((prev) => [
+          ...prev,
+          { id: prev.length + 1, text: "" },
+        ]);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -21,8 +33,16 @@ const Note: React.FC = () => {
     event: React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
     if (event.key === "Delete") {
-      setNotes((prev) => prev.filter((n) => n !== noteId));
+      setNotes((prev) => prev.filter((n) => n.id !== noteId));
     }
+  };
+
+  const handleChange = (noteId: number, value: string) => {
+    setNotes((prev) =>
+      prev.map((n) =>
+        n.id === noteId ? { ...n, text: value } : n
+      )
+    );
   };
 
   const getStyle = (index: number) => {
@@ -41,6 +61,7 @@ const Note: React.FC = () => {
           top: `${y}px`,
           width: `${w}px`,
           height: `${h}px`,
+          display: "flex",
         };
       }
 
@@ -61,12 +82,32 @@ const Note: React.FC = () => {
   return (
     <div className="container_for_note">
       {notes.map((note, index) => (
-        <div key={note} className="note_area" style={getStyle(index)}>
+        <div key={note.id} className="note_area" style={getStyle(index)}>
+          {/* textarea */}
           <textarea
             className="text_area"
             placeholder={`Напиши свою нотатку...`}
-            onKeyDown={(e) => handleDelete(note, e)}
+            value={note.text}
+            onChange={(e) => handleChange(note.id, e.target.value)}
+            onKeyDown={(e) => handleDelete(note.id, e)}
+            style={{ flex: 1, marginRight: "10px" }}
           />
+          {/* Markdown preview */}
+          <div
+            className="markdown_preview"
+            style={{
+              flex: 1,
+              border: "1px solid #ccc",
+              padding: "10px",
+              overflowY: "auto",
+              background: "#fafafa",
+              borderRadius: "6px",
+            }}
+          >
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {note.text || "*Нічого не написано...*"}
+            </ReactMarkdown>
+          </div>
         </div>
       ))}
     </div>
