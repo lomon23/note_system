@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "./style_note.css";
+import Terminal from "./terminal.tsx"
 
 const Note: React.FC = () => {
   const [text, setText] = useState<string>("# Привіт 👋\nТут можна писати **Markdown**");
@@ -32,15 +33,7 @@ const Note: React.FC = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-
-        {showTerminal && (
-          <textarea
-            className="terminal_area"
-            placeholder="Terminal..."
-            value={terminalText}
-            onChange={(e) => setTerminalText(e.target.value)}
-          />
-        )}
+        {showTerminal && <Terminal />}
       </div>
 
       {/* Right side */}
