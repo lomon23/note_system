@@ -1,41 +1,57 @@
-
- {
-    background-color: #cccccc ; 
-}
-
 .note_area {
-    position: relative;
-    width:100vw;
-    height:100vh;
-    flex-direction: column;
-    gap:5px;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background-color: #b1b1b3;
-    box-shadow: 5px 5px 10px rgba(0,0,0, 0.3)
-}
-.container_for_note{
-    display:flex;
-    flex-wrap: wrap;    
-    gap: 10px;
-    justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;              /* ділимо на дві частини */
+  flex-direction: row;
+  border-radius: 8px ;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #b1b1b3;
 }
 
-.text_area{
-   flex: 1;
-   width:100%;
-   height: 100%;
-   padding: 2px;
-   font-size: 16px;
-   border:1px solid #ccc;
-   border-radius: 8px;
-   resize: none;
-   border: none;
-   outline: none;
-   box-sazing: border-box;
+/* ліва частина */
+.left_side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;     /* textarea зверху, термінал знизу */
+  gap: 10px;
+}
+
+/* textarea */
+.text_area {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background: #fafafa;
+  resize: none;
+  outline: none;
+}
+
+/* термінал */
+.terminal_area {
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Fira Code", "Courier New", monospace;
+  background: #ffffff;
+  color: #000000;
+  height: 150px;   /* фіксована висота */
+  resize: none;
+  outline: none;
+}
+
+/* права частина */
+.markdown_preview {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fafafa;
+  overflow-y: auto;
 }
